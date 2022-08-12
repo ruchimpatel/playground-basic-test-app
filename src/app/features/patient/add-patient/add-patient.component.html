@@ -1,0 +1,22 @@
+
+<div class="margin-left-13">
+    <h1>Patient Questionnaire</h1>
+  </div>
+<mat-form class="mat-flex-form" [formGroup] = "patientForm">
+    <div *ngFor="let item of formData.item">
+        <app-form [item]="item" [form]="patientForm"></app-form>
+    </div>
+
+</mat-form>
+<div style="display: flex;justify-content: center;">
+    <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="patientForm.invalid">Submit</button>
+</div>
+
+<div class="margin-left-13" *ngIf="dataSubmitted">
+    <h1>Patient Questionnaire Response</h1>
+    <code>
+        <pre>{{questionnaireResponse |json}}</pre>
+    </code>
+</div>
+
+

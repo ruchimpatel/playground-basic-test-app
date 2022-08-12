@@ -1,0 +1,29 @@
+<div [formGroup] = "form">
+    <mat-label class="mat-flex-form-item" [attr.for]="item.linkId">{{item.linkId}}. {{item.text}}</mat-label>
+    <div [ngSwitch]="item.type">
+        
+        <mat-form-field class="mat-flex-form-item" *ngSwitchCase="type.text" appearance="fill">
+            
+            <input matInput [id]="item.linkId" type="text" [formControlName]="item.linkId">
+        </mat-form-field>
+        <mat-form-field  class="mat-flex-form-item" *ngSwitchCase="type.select" appearance="fill">
+            <mat-select  [id]="item.linkId" [formControlName]="item.linkId">
+                <mat-option *ngFor="let opt of item.option" [value]="opt.valueCoding.code">{{opt.valueCoding.code}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div  class="mat-flex-form-item" *ngSwitchCase="type.radio" appearance="fill">  
+        <mat-radio-group  [id]="item.linkId" [formControlName]="item.linkId">
+            <mat-radio-button class="margin-right-20" [value]=true>True</mat-radio-button>
+            <mat-radio-button [value]=false>False</mat-radio-button>
+        </mat-radio-group>
+    </div> 
+        <mat-form-field   class="mat-flex-form-item" *ngSwitchCase="type.date" appearance="fill">
+        <input matInput [matDatepicker]="datepicker" [max]="today" [formControlName]="item.linkId"  [disabled]="true" >
+        <mat-datepicker-toggle  matSuffix [for]="datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker  [disabled]="false" ></mat-datepicker>
+        </mat-form-field>
+         <div class="mat-flex-form-item-error"  *ngIf="!isValid">Question {{item.linkId}} is required</div>
+    </div>
+        
+    
+</div>
